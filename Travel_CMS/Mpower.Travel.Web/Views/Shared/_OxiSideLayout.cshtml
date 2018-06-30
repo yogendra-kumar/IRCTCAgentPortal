@@ -1,0 +1,39 @@
+<div class="div_left_nav_bar" style="margin-top:5px;">
+<ul>
+     @if(User.IsInRole("Agent")) {
+    <li id="distribution-main-li"><a href="" ng-click="planTravel()">Plan my Travel</a></li>
+    }
+    <li id="distribution-li"> <a href="javascript:void(0)">Passenger List</a>
+        <div id="expand-collapse" class="expand"><b>+</b></div>
+        @if(User.IsInRole("Agent")) {
+        <ul>
+            <li id="rmu-li" class="sub-menu-tab"><a href="/PassengerList">Passenger List</a></li>
+             <li id="rmu-li" class="sub-menu-tab last_nav"><a href="/PassengerTravelList">Passenger Travel List</a></li>
+        </ul>}
+    </li>
+    <li id="distribution-li"> <a href="javascript:void(0)">My Transactions</a>
+        <div id="expand-collapse" class="expand"><b>+</b></div>
+        @if(User.IsInRole("Agent")) {
+        <ul>
+            <li id="rmu-li" class="sub-menu-tab"><a href="/BookedTicket">Booked Ticket</a></li>
+            <li id="corporate-li" class="sub-menu-tab"><a href="/CancelTicket">Canceled E-Ticket</a></li>
+            <li id="ro-li" class="sub-menu-tab"><a href="/PnrStatus">PNR Status New</a></li>
+            <li id="bmodes-li" class="sub-menu-tab"><a href="/TDRHistory">TDR History</a></li>
+            <li id="rmu-li" class="sub-menu-tab last_nav"><a href="/PendingTickets">Pending Tickets</a></li>
+        </ul>}
+    </li>
+   
+    <li id="distribution-li"> <a href="javascript:void(0)">General</a>
+        <div id="expand-collapse" class="expand"><b>+</b></div>
+        @if(User.IsInRole("Agent")) {
+        <ul>
+            <li id="services-at-retail-li" class="sub-menu-tab"><a href="/TrainAtGlance">Trains at a Glance</a></li>
+            <li id="bmodes-li" class="sub-menu-tab"><a href="/PopularStations">Popular Stations/Codes</a></li>
+            <li id="bmodes-li" class="sub-menu-tab"><a href="">Get Oxigen Application</a></li>
+            <li id="bmodes-li" class="sub-menu-tab last_nav"><a href="">Booking/Cancellation Slip for Agent</a></li>
+        </ul>
+        }
+        <li id="bmodes-li"><a href="">E-Ticket User-Manual</a></li>
+    </li>
+</ul>
+</div>

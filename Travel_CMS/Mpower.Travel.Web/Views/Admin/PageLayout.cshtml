@@ -1,0 +1,81 @@
+ @{
+    Layout=null;
+}
+<section class="content-header">
+	<h1>
+		Page Pan Setting.
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+		
+	</ol>
+</section>
+<section class="content" ng-app="mainApp" ng-controller="PageLayoutController">
+	<div class="container">
+		<form class="form-horizontal">
+			<ul class="nav nav-pills">
+				<li><a data-toggle="pill" href="/PageEdit">Page Information</a></li>
+				<li><a data-toggle="pill" href="/PageContent">Content</a></li>
+				<li class="active"><a data-toggle="pill" href="/PageLayout">Page Layout</a></li>
+				<li><a data-toggle="pill" href="/PageMetaData">Meta Data</a></li>
+			</ul>
+
+			<br/>
+			<div class="tab-content">
+				<div id="menu2" class="tab-pane fade in active">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-4">
+								<div class="col-md-offset-3">
+									<div class="form-group">
+										<div class="checkbox">
+											<label><input type="checkbox" value="" ng-model="checkedLeft" checked="checkedLeft" />Select Left Panes</label>
+										</div>
+										<select data-ng-model="layoutddlLeft" ng-disabled="!checkedLeft" class="form-control">
+                                       <option value= >-- Select Left Layout--</option>
+                                <option ng-repeat="c in PagePanes" value="{{c.id}}" ng-selected = "{{ c.id == Page.leftPanId }}" >  
+                                {{c.title}}
+                                </option>
+                                </select>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="col-md-4">
+								<div class="col-md-offset-2">
+									<div class="form-group">
+										<div class="checkbox">
+											<label><input type="checkbox" value="0" ng-model="checkedRight" checked="checkedRight" />Select Right Panes</label>
+										</div>
+										<select data-ng-model="layoutddlRight" ng-disabled="!checkedRight" class="form-control">
+                                <option value=>-- Select Right Layout--</option>
+                                <option ng-repeat="c in PagePanes" value="{{c.id}}" ng-selected="{{ c.id == Page.rightPanId }}">
+                                {{c.title}}
+                                </option>                                
+                                </select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<modal visible="showModal">
+					<span ng-style="{color : (Error)== true ? 'red' : 'green'}">{{Message}}</span>
+				</modal>
+				<div class="row">
+					<div class="form-group">
+						<div class="col-md-offset-4 col-md-12">
+							<button type="submit" class="btn btn-primary " ng-click="Save()">Submit</button>
+							<button type="submit" class="btn btn-default " ng-click="Back()">Cancel</button>
+						</div>
+					</div>
+
+				</div>
+			<!--Loader-->
+			<!--<loading></loading>-->
+			</div>
+			</div>
+
+			</div>
+		</form>
+	</div>
+</section>

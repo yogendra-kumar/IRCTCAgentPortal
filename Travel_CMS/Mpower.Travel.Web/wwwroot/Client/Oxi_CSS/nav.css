@@ -1,0 +1,32 @@
+#topnav{float:left;width:100%;margin-top:6px;}
+#botnav{background: #014b92;float:left;width: 981px;height:12px;margin:0px;}
+#topnav ul li a.act {color: #fff;background: #014b92;border-bottom: 10px solid #014b92;}
+ul#menu{width:981px}
+ul#menu, ul#menu ul.sub-menu {padding:0;margin: 0;}
+ul#menu li{list-style-type: none;display:inline-block;float:left;}
+ul#menu li a{display: block;text-decoration: none;text-align:center;line-height: 45px;color: #0093dd;font-family:calibri;font-size:14px;font-weight: bold;   
+  border-bottom: 10px solid #0093dd;background: #ffffff;} 
+ul#menu li a:hover{color: #fff;background: #014b92;border-bottom: 10px solid #014b92;}
+ul#menu li ul.sub-menu li a {text-decoration: none;color: #fff;background: #014b92;padding: 1px;display:inline-block;}
+ul#menu li {position: relative;}
+/*sub menu*/
+ul#menu li ul.sub-menu {display:none;position: absolute;top: 55px;left: 0;}
+ul#menu li:hover ul.sub-menu {display:block;}
+ul#menu li:hover a{background: #014b92;border-bottom: 10px solid #014b92;color:#fff}
+ul#menu li:hover ul.sub-menu li a{display: block;text-decoration: none;text-align:center;line-height: 45px;color: #fff;font-family:calibri;font-size:14px;
+  font-weight: bold;border-bottom: 1px solid #fff;background: #014b92;}
+ul#menu li:hover ul.sub-menu li a:hover{background: #0093dd;}
+#about-us-li{width:25%; padding-right:1px; }
+#retailer-li{width:25%;padding-right:1px;}
+#finance-li{width:25%;padding-right:1px;}
+#partner-li{width:24.65%;}
+#consumer-li, #services-li, #mobile-wallet-li{width:25%;padding-right:1px;}
+
+ul#menu #businessli ul.sub-menu li {width:179px}
+ul#menu #rechargeli ul.sub-menu li {width:220px}
+ul#menu #distributionli ul.sub-menu li {width:199px}
+ul#menu #bankingli ul.sub-menu li {width:230px}
+ul#menu #rechargeli ul.sub-menu li {width:221px}
+.activating-nav{
+    background-color: rgb(0, 51, 102);
+}

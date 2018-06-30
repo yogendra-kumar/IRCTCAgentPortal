@@ -1,0 +1,127 @@
+@charset "utf-8";
+/* CSS Document */
+
+.div_tv_commercial_container
+{
+	float:left;
+	width:195px;
+	margin-right:70px;
+}
+
+.div_tv_commercial_heading
+{
+	float:left;
+	margin-top:25px;
+	font-family:calibri;
+	font-size:16px;
+	color:#666666;
+	font-weight:bold;
+	
+}
+.div_tv_commercial_image
+{
+	float:left;
+	width:209px;
+	height:148px;
+	margin-top:10px;
+
+/*border:2px solid #d0d0d0;*/
+	display:block;
+	border-radius:6px;
+	-webkit-border-radius:6px;
+	-moz-border-radius:6px;
+
+	
+}
+.languagelink
+{
+
+float:left;
+	width:216px;
+	height:148px;
+	margin-top:10px;
+
+	border:0px #fff;
+	display:block;
+	
+}
+.languagelink ul{
+margin: 5px 0px 0px;
+padding-left: 13px;
+list-style: disc outside url('../../images/arrow-list-info.png');}
+.languagelink ul li a
+{
+	display:block;
+ padding:2px;
+ 
+ 
+
+}
+.div_tv_commercial_image a
+{
+	width:209px;
+	height:148px;
+	display:block;
+/*	background:#ffffff; */
+	opacity:.48;
+	filter: alpha(opacity=48);
+           
+}
+
+/*
+#ps-video{
+		background-image:url(../../images/tv-commericals/video-promod-saxena.jpg);
+	
+		
+}
+#tvc-with-subtitle
+{
+	background-image:url(../../images/tv-commericals/tvc-with-subtitle.jpg);
+}
+#oxigen-financial-inclusion
+{
+	background-image:url(../../images/tv-commericals/oxigen-financial-inclusion.jpg);
+}
+#oxign-money-transfer
+{
+	background-image:url(../../images/tv-commericals/oxigen-wallet-money-transfer.png);
+	
+}
+#indian-brand-equity-foundation
+{
+	background:url(../../images/tv-commericals/indian-brand-equity-foundation.jpg);
+	
+}
+#div-download
+{
+	position:relative;
+	border:none;
+	
+	
+}
+*/
+div.div_tv_commercial_image >a:hover
+{
+	opacity:1;
+	background:none;
+	
+	
+}
+div.div_tv_commercial_image>a:hover>img 
+{
+	/* background-image:url(../Images/img-download-active.png); */
+	
+	
+}
+
+h2 a:link
+{
+	color:#38b3d5;
+	
+}
+	h2 a:hover
+{
+	color:#0a4d94;
+	
+}
+}

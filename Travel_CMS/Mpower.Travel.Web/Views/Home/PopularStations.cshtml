@@ -1,0 +1,30 @@
+@{ Layout=null; }
+<link rel="stylesheet" type="text/css" href="~/css/CustomTable.css">
+<section class="content" style="margin:10px ">
+	
+	<div class="panel panel-primary">
+		<div class="panel-heading" style="padding:15px;background-color:#0059a0;color:white;">
+			<b>Popular Stations</b>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<table class="table">
+                                    <tr>
+                                        <th>NAME
+                                        </th>
+                                        <th>STATION CODE
+                                        </th>
+                                    </tr>
+                                    <tr ng-repeat="PopularStationResponseList in getPopularStationResponse">
+                                        <td>{{PopularStationResponseList.stnName}}
+                                        </td>
+                                        <td>{{PopularStationResponseList.stnCode}}
+                                        </td>
+                                    </tr>
+                                </table>
+			</div>
+		</div>
+	</div>
+	
+	
+</section>

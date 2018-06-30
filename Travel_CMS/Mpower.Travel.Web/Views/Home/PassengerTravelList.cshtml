@@ -1,0 +1,133 @@
+@{
+   Layout=null;
+}
+<!--<link rel="stylesheet" href="~/plugins/datatables/dataTables.bootstrap.css">-->
+<link rel="stylesheet" type="text/css" href="~/css/CustomTable.css">
+<div class="content-header">
+    <div class="col-md-12">
+          <div class="col-sm-12">
+	<div class="panel panel-primary mt5 ml5">
+              <div class="panel-heading" style="padding: 10px">Passenger Lists</div>
+              <!--<div class="panel-body"><b>Passenger Travel Lists</b></div>--> 
+            </div>
+            <div class="">For convinience of easy inputting of Passenger particulars during booking of tickets, you can create and modify various combinations of Travel Lists of Passengers for different tickets/journeys from your Master List of Passengers.<br/>
+              Please select one of your travel lists.You can also Add/Modify the details in the reservation form.</div>
+
+<section class="content" ng-app="App" >
+	<div class="container">
+		<form class="form-horizontal" novalidate name="TravelListForm">
+			
+			<div class="tab-content">
+			<div class="col-md-12">
+            <div class="row">								
+				<div class="form-group">
+				
+				<label class= "control-label col-md-2">Select TravelList</label>
+				<div>
+				<div class="col-md-6">
+				<select ng-model="travelListmodal" class="form-control" ng-change="TableUpdate()">         //track by $index                       
+                    <option  value="">-- Create New List--</option>
+                    <option ng-repeat="item in TravelList" value="{{item}}"  >  
+                                {{item.listName}}
+                    </option>
+                    </select>
+				</div>
+				</div>
+				</div>
+            </div>			
+			<div class="row">
+				<div class="form-group">
+                    <label class="col-md-2 control-label">Name of Travel List:</label>                                 
+                <div class="col-md-6">
+
+                    <input type="text" name="txtTravelListName" maxlength="60" required ng-model="UserTravelListName" class="form-control" />                                  
+                    <span class="text-danger">*</span>
+                    <span ng-show="TravelListForm.txtTravelListName.$error.required" class="text-danger">
+                                    This is a required field
+                    </span>
+                </div>                              
+                </div>
+			</div>
+
+			<div class="row">
+                <div class="form-group">
+                <label class="col-md-2 control-label">Description of Travel List :</label>                            
+                <div class="col-md-6">
+                <input type="text" name="txtDescription" maxlength="100" ng-model= "UserTravelListDescription" class="form-control"  />                                             
+                </div>
+                </div>
+			</div>
+            <div class="row">
+             <div class="form-group ">
+                <label class="control-label col-sm-2" for="passenger_name">Passenger Name:</label>
+                <div class="col-sm-3">
+                  <input disabled type="text" class="form-control" id="passenger_name" placeholder="">
+                </div>
+                 <!--<div class="col-sm-6">
+                  <button type="button"  class="btn btn-sm btn-primary" id="search">Search</button>
+                  <button type="button" class="btn btn-sm btn-primary" id="add_passengers">Add Passengers</button>
+                  <button type="button" class="btn btn-sm btn-primary" id="save_travel_list">Save Travel List</button>
+				  </div>
+              </div>-->
+            </div>
+			<div class="col-md-9"> 
+        <div class="panel panel-primary" >
+          <div class="panel-heading" style="background-color:#0059a0;color:white;">
+              <b>Passenger Travel List</b>
+          </div> 
+          <table id="pexample1" class="table table-bordered table-striped table-responsive" role="grid" style="font-size:12px" ng-model="tabledata">    
+         <thead>
+          <tr style="background-color: honeydew">
+			<td class="col-md-1" ng-hide="IsTravelList">Select</td>
+            <td class="col-md-1 hidden-sm hidden-xs" ng-hide="!IsTravelList">S.NO</td>
+            <td class="col-md-2">Name</td>
+            <td class = "col-md-1" >Age</td>
+            <td class="col-md-1 hidden-sm hidden-xs">Gender</td>
+            <td class="col-md-1 hidden-sm hidden-xs">Berth Preference</td>
+            <td class="col-md-1 hidden-sm hidden-xs">Food Preference</td>
+            <td class="col-md-1 hidden-sm hidden-xs">Senior Citizen</td>
+            <td class="col-md-1">Date of Birth</td>
+            <td class="col-md-2 hidden-sm hidden-xs">ID Card Type</td>
+            <td class="col-md-1 hidden-sm hidden-xs">ID Card Number</td>
+                        
+          </tr>
+         </thead>
+    
+         <tbody>
+            <tr ng-repeat="roll in tabledata track by $index">
+				<td class="col-md-1" ng-hide="IsTravelList"><input type="checkbox" name="cbSelect" ng-model="roll.checked" value="{{ roll }}" /></td> 
+                <td class="col-md-1 hidden-sm hidden-xs" ng-hide="!IsTravelList"> {{ $index+1}}</td>             
+              <td class="col-md-2"> <span>{{ roll.name}} </span></td>
+              <td class="col-md-1"> <span>{{Age(roll.bMonth,roll.bDay,roll.bYear )}} </span></td>
+              <td class="hidden-sm hidden-xs"><span> {{ roll.sex }} </span></td>
+              <td class="hidden-sm hidden-xs"><span> {{ roll.birthPf }} </span></td>
+              <td class="hidden-sm hidden-xs"><span> {{ roll.foodPf }} </span></td>
+              <td class="hidden-sm hidden-xs"><span> {{ roll.senior }} </span></td>
+              <td class="col-md-2"><span>{{ roll.bDay+"-"+roll.bMonth+"-"+roll.bYear  }} </span></td>
+              <td class="col-md-2 hidden-sm hidden-xs"><span>{{ roll.CardName }}  </span></td>
+              <td class="col=md-1 hidden-sm hidden-xs"><span>{{ roll.idCardNumber }}</span></td>
+              </tr>
+         </tbody>
+         </table>
+         <modal visible="showModal">
+					<span ng-style="{color : (Error)== true ? 'red' : 'green'}">{{Message}}</span>
+		</modal>
+        </div>
+				 
+			<div class="row">
+				<div class="form-group">
+					<div class="col-md-offset-4 col-md-12">
+						<a  class="btn btn-primary " confirmed-click="Save(tabledata)" ng-confirm-click="Do you want to save the record?">Submit</a>
+					    <a  class="btn btn-default" confirmed-click="Remove(travelListmodal)" ng-confirm-click="Do you want to delete the record?">Delete</a>
+								</div>
+							</div>
+
+			</div>
+				</div>
+			</div>
+
+		</form>
+	</div>
+    </div>
+</div>
+</div>

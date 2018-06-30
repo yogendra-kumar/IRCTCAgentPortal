@@ -1,0 +1,213 @@
+@{
+   Layout=null;
+}
+<!--<link rel="stylesheet" href="~/plugins/datatables/dataTables.bootstrap.css">-->
+<link rel="stylesheet" type="text/css" href="~/css/CustomTable.css">
+<!--<section class="content-header">	<br><br>   added for css design-->
+	<!--<h2>
+		Passenger List.
+	</h2>-->
+	<!--<br>-->
+	<!--<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i> Passenger List</a></li>		
+	</ol>-->
+  <div class="col-md-10">
+          <div class="col-sm-12">
+            <div class="panel panel-primary mt5 ml5">
+              <div class="panel-heading" style="padding: 10px">Passenger Lists</div>
+              <!--<div class="panel-body"><b>Passenger Travel Lists</b></div>--> 
+            </div>
+            <div class="row col-md-12"> You can create a master list of all passengers who are likely to travel on the tickets booked by you, so that while booking tickets you can easily input data from this list.
+              Please click on "Add Names" and enter the details of possible passengers in the format given.
+              You can add any number of passengers in this master list; however, as per Railway rules, a maximum of only 6 names can be included in any one Passenger Travel List for a specific journey.</div>
+         
+<!--</section>-->
+<!--<br>-->
+<div class="content" ng-app="App" >
+	<div class="container">
+    
+		<form class="form-horizontal" novalidate name="PassengerListForm">
+      <div class="tab-content">       
+			<div class="col-md-9">
+        <!--<br>
+        <div class="panel panel-primari">
+          <div class="panel-heading" style="padding:15px;background-color:#0059a0;color:white;">
+            <b>Master List of Passenger</b>
+            </div>
+             </div>-->
+          
+          <div class="row">	
+            
+				      <div class="form-group">				
+				    <label class= "control-label col-md-3">Name(max. 60 character)</label>				
+				    <div class="col-md-6">
+				    <input type="text" name="pname" oncopy="return false" onpaste="return false" oncut="return false" maxlength="60" required ng-model="passengerName" class="form-control" reg-ex-input reg-ex="^[a-zA-Z ]+$" />
+             </div> 
+             <span ng-show="PassengerListForm.pname.$error.required" class="text-danger"> 
+               Mandatory field
+                                </span>       
+                                          
+             </div>
+				    </div> 
+
+           <div class="row">								
+				 
+            <div class="col-xs-6 col-sm-3">
+					<label for="txtDOJ">Date of Birth</label>
+				</div>
+				<div class="col-xs-6 col-sm-3">
+					<div class="form-group">
+						<div class="input-group" name='datetimepicker1'>
+							<input type="text" ng-model="journyDate" aria-describedby="start-date" name="date" class="form-control" />
+							<span class="input-group-addon" id="start-date"><span class="glyphicon glyphicon-calendar"></span></span>
+						</div>
+            <span ng-show="PassengerListForm.date.$error.required" class="text-danger"> 
+               Mandatory field
+                                </span> 
+					</div>
+				</div>
+            </div>
+
+          <div class="row">								
+				  <div class="form-group">				
+				    <label class= "control-label col-md-3">Gender</label>				
+				    <div class="col-md-6">
+				        <input type="radio" name="male" id="rgender" ng-model="gender" value="Male" ng-init="gender='Male'" ng-checked="gender=='Male'" />
+                <label for="rgender" class= "control-label">Male  </label>	
+                <input type="radio" name="rgender" id="female" ng-model="gender" value="Female" />
+                <label for="female" class= "control-label">Female  </label>                	
+				  </div>
+				  </div>
+          </div>
+
+          <div class="row">								
+				  <div class="form-group">				
+				    <label class= "control-label col-md-3">Birth Preference</label>				
+				    <div class="col-md-6">
+             
+				    <select data-ng-model="berth" class="form-control" >
+                    <option  value="" >Select Berth Prefernce</option>
+                   <option ng-repeat="berth1 in BerthSleeper" value="{{berth1.fullName}}" ng-selected="berth==berth1.fullName" >  
+                                {{berth1.fullName}}
+                    </option>
+                    </select>
+				  </div>
+				  </div> 
+          </div>
+
+          <div class="row">								
+				  <div class="form-group">				
+				    <label class= "control-label col-md-3">Food Preference</label>				
+				    <div class="col-md-6">
+				      <input type="radio" name="rfood" ng-model="foodPf" id="veg" value="Veg" ng-init="foodPf='Veg'" ng-checked="foodPf=='Veg'"/>
+              <label for="veg" class= "control-label">Veg  </label>	
+              <input type="radio" name="rfood" ng-model="foodPf" id="nonveg" value="NonVeg" />
+              <label for="nonveg" class= "control-label">NonVeg  </label>
+            </div>
+				  </div>
+				  </div> 
+
+          <div class="row">								
+				  <div class="form-group">				
+				    <label class= "control-label col-md-3">Senior Citizen</label>				
+				    <div class="col-md-6">
+				      <input type="radio" name="rsenior" ng-model="seniorCitizen" id="yes" value="true"  ng-checked="{{seniorCitizen}}" />
+              <label for="yes" class= "control-label">yes</label>	
+              <input type="radio" name="rsenior" ng-model="seniorCitizen" ng-checked="{{!seniorCitizen}}" id="no" value="false" />
+              <label for="no" class= "control-label">no </label>
+            </div>
+				  </div>
+				  </div> 
+
+          <div class="row">								
+				  <div class="form-group">				
+				    <label class= "control-label col-md-3">ID Card Type</label>				
+				    <div class="col-md-6">
+				    <select data-ng-model="CardTpye" class="form-control">                                
+                    <option  value="" >Select ID Card Type</option>
+                    <option ng-repeat="idcard in IDCardType" value="{{idcard.id}}" ng-selected = "CardTpye==idcard.name" >  
+                                {{idcard.name}}
+                    </option>
+                    </select>
+				  </div>
+				  </div>
+          </div>
+
+          <div ng-disabled="" class="row">								
+				  <div class="form-group">				
+				    <label class= "control-label col-md-3">ID Card Number</label>				
+				    <div class="col-md-6">
+				    <input type="text" name="txtId" maxlength="20"  data-ng-model="CardNumber" class="form-control"  />
+				  </div>
+				  </div> 
+          </div> 
+          <modal visible="showModal">
+					<span ng-style="{color : (Error)== true ? 'red' : 'green'}">{{Message}}</span>
+				  </modal>
+
+        
+          <div class="row">								
+				  <div class="form-group">	
+				    <div class="col-md-offset-3 col-md-9">
+				    <a  ng-style="{display:(btnEnabled)?'block':'none'}"   class="btn btn-primary col-md-3" confirmed-click="Save(passenger.id)" ng-confirm-click="Do you want to save the record?">Add Passeneger</a>
+				    <a  ng-style="{display:(!btnEnabled)?'block':'none'}"  class="btn btn-success col-md-3" confirmed-click="Update(passenger.id)" ng-confirm-click="Do you want to update the record?">Modify Passenger</a>
+            <a  ng-style="{display:(!btnEnabled)?'block':'none'}" class="btn btn-danger col-md-3" ng-click="Clean()">Cancel</a>
+
+            </div>
+				  </div>
+				  </div> 
+
+         
+        </div>
+        <div class="col-md-9"> 
+        <div class="panel panel-default" >
+          <div class="panel-heading" style="padding:15px;background-color:#0059a0;color:white;">
+            <b>Passenger List</b>
+          </div>
+          </div>             
+          <table id="pexample1" class="table table-bordered table-striped table-responsive" role="grid" style="font-size:12px"><!--aria-describedby="pexample1_info" > -->    
+         <thead>
+          <tr style="background-color: honeydew">
+            <td class="col-md-1 hidden-sm hidden-xs">S.No</td>
+            <td class="col-md-2">Name</td>
+            <td class="col-md-1 ">Age</td>
+            <td class="col-md-1">Gender</td>
+            <td class="col-md-1 hidden-sm hidden-xs">Berth Choice</td>
+            <td class="col-md-1 hidden-sm hidden-xs">Food Choice</td>
+            <td class="col-md-1 ">Senior Citizen</td>
+            <td class="col-md-2 ">Date of Birth</td>
+            <td col-md-2>Action</td>
+            
+          </tr>
+         </thead>
+    
+         <tbody>
+            <tr ng-repeat="roll in passengerList">
+              <td class="col-md-1 hidden-sm hidden-xs"><span> {{ $index+1}} </span> </td>
+              <td class="col-md-2"><span> {{ roll.name}}  </span> </td>
+              <td class="col-md-1 "><span> {{Age(roll.bMonth,roll.bDay,roll.bYear )}}</span></td>
+              <td cclass="col-md-1"><span> {{ roll.sex }}</span></td>
+              <td class="col-md-1 hidden-sm hidden-xs"><span> {{ roll.birthPf }}</span></td>
+              <td class="col-md-1 hidden-sm hidden-xs"><span> {{ roll.foodPf }}</span></td>
+              <td class="col-md-1"><span> {{ roll.senior }}</span></td>
+              <td class="col-md-2"><span> {{ roll.bDay+"-"+roll.bMonth+"-"+roll.bYear  }}</span></td>
+               <td col-md-2><span><a href="#" ng-click="editList(roll.id)" style="cursor: pointer;padding:3px" class="text-black" >
+                <span class="glyphicon glyphicon-pencil"></span></a>
+              <a confirm-click="Remove(roll.id)" ng-confirm-click="Do you want to delete?" onMouseOver="this.style.color='red'" onMouseOut="this.style.color='black'"
+												style="cursor: pointer;padding:3px;color:black !important">
+                <span class="glyphicon glyphicon-trash"></span></a></span></td>
+              </tr>
+         </tbody>    
+         </table>       
+         
+        
+        </div>	
+			</div>
+			</form>
+      <modal visible="showModal">
+      <span ng-style="{color : (Error)== true ? 'red' : 'green'}">{{Message}}</span>
+    </modal>
+	</div>
+</div>
+ </div>
+  </div>

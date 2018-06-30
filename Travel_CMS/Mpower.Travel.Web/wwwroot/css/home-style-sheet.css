@@ -1,0 +1,36 @@
+@charset "utf-8";
+/* Index Page CSS*/
+body {background-color: #EFEFEF;color: #FFFFFF;font-family: calibri;margin: 0;padding: 0;}
+img, a, div{margin:0px; padding:0px;}
+img{border:none; border-style:none;}
+.main_container{margin:0 auto;width:1024px; height:100%; overflow: hidden; padding:0px; background:url(../../images/index-body-bg.jpg);color:#ffffff;font-family:calibri;;}
+.div_header{float:left;width:1024px;}
+.logo{float:left;width:330px;height:144px;margin:7px 0px 13px 351px;}
+.banner{float:left;width:1024px;height:208px;}
+.banner img{float:left;}
+.div_coprporatevideo{float:left;width:408px;height:208px;}
+.div_coprporatevideo a{text-decoration: none;}
+.div_coprporatevideo a img{text-decoration:none;border: none;padding: 0px;}
+.div_inner_banner{float:left;width:615px;height:208px;margin:0px 0px 0px 1px;background:url(../../Images/HeaderBanner.jpg) no-repeat;}
+.div_contentcontainer{float:left;width:860px;margin:34px 82px 34px 82px;text-align:center;font-size:18px;}
+.div_content{float:left; color:#ffffff;font-family:calibri;}
+.div_content a{ text-decoration:none;width:79px;height:44px; color:#FFFFFF; border:none;padding:84px 46px 5px 46px; display:block; }
+.div_content#aboutus{background-color:#014b92;}
+.div_content#rp-login{background-color:#a7c42a;}
+.div_content#consumer{background-color:#ea8a33;}
+.div_content#franchise{background-color:#38b3d5;}
+.div_content#sevices{background-color:#e04e27;}
+.div_footer{float:left;width:1024px;height:90px;background-color:#014b92;}
+.div_footer_top{float:left;width:1024px;height:8px;background:url(../../images/footer-top.jpg) no-repeat;background:top:0px; left:0px;}
+.div_copyright{float:left;width:70%;margin:50px 0px 0px 36px;font-size:14px;}
+.div_connect_with_us{float:right;margin:11px 42px 0px 0px;font-size:15px;font-weight:bold;}
+.div_connect_with_us ul{margin:6px 0px 0px 0px;padding:0px;width:120px;height:34px;list-style-type:none;}
+.div_connect_with_us ul li{display:inline;}
+.div_connect_with_us ul li a{float:left;margin-right:6px;width:30px;height:31px; text-decoration:none;}
+.div_connect_with_us ul li a#facebook{background:url(../../images/ico_facebook.png) no-repeat;}
+.div_connect_with_us ul li a#linkedin{background:url(../../images/ico_linkedin.png) no-repeat;}
+.div_connect_with_us ul li a#twitter{background:url(../../images/ico_twitter.png) no-repeat;}
+
+/* Index Page CSS End*/
+/* CSS Document */
+

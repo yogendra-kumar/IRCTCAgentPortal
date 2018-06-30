@@ -1,0 +1,48 @@
+<!------ Second------>
+@{
+    Layout=null;
+}
+<section class="content-header">
+	<h1>
+		Edit Page Content.
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li class="active">Edit Page id=@ViewData["PageId"]</li>
+	</ol>
+</section>
+<section class="content">
+	<div class="container">
+		<form class="form-horizontal" novalidate name="PageForm">
+			<ul class="nav nav-pills">
+				<li><a data-toggle="pill" href="/PageEdit">Page Information</a></li>
+				<li class="active"><a data-toggle="pill" href="/PageContent">Content</a></li>
+				<li><a data-toggle="pill" href="/PageLayout">Page Layout</a></li>
+				<li><a data-toggle="pill" href="/PageMetaData">Meta Data</a></li>
+			</ul>
+
+			<br/>
+			<div class="tab-content">
+				<div id="menu1" class="tab-pane fade in active">
+					<div class="col-md-10">
+						<div class="form-group">
+							<textarea ng-model="Page.pageHtml" maxlength="10000" name="editor1" data-ck-editor="Page.pageHtml"></textarea>
+
+						</div>
+						<modal visible="showModal">
+							<span ng-style="{color : (Error)== true ? 'red' : 'green'}">{{Message}}</span>
+						</modal>
+						<div class="form-group">
+							<div class="col-md-offset-6 col-md-12">
+								<button type="submit" class="btn btn-primary" ng-click="Update()">Submit</button>
+								<button type="submit" class="btn btn-default " ng-click="Back()">Cancel</button>
+							</div>
+						</div>
+						<!--Loader-->
+						<!--<loading></loading>-->
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</section>

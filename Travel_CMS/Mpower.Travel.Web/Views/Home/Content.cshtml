@@ -1,0 +1,268 @@
+@{ Layout=null;} {{ScriptUrl}}
+<section class="content-header">
+	<div class="col-md-12">
+		<h2>{{PageSetting.title}}</h2>
+		<ol class="breadcrumb" ng-if="PageSetting.title" align="right">
+			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+			<li class="active">{{PageSetting.title}}</li>
+		</ol>
+	</div>
+</section>
+<div class="col-md-12" ng-if="!PageSetting.title">
+		<div class="col-sm-12">
+			<div class="panel panel-primary mt5 ml5">
+				<div class="panel-heading"><strong>Plan My Travel</strong></div>
+				<div class="panel-body">
+					<form class="form-horizontal mt10">
+						<div class="form-group">
+							<div class="form-control-static"><strong> <a class="ml30" href="#">Select Favourite Journey List </a> </strong></div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-sm-4" for="from-station">From Station <span class="color-red">*</span> :</label>
+								<div class="col-sm-7">
+									<input type="text" autocomplete="false"  ng-model="trainFrom" ng-change="findStation(trainFrom)" class="form-control" id="from-station" placeholder="">
+								<div  style="position:absolute;z-index:100" class="list-group" ng-if="divFrom">
+								<a href="#" ng-click="SelectItFrom(MyStation.stnCode)" class="list-group-item" ng-repeat="MyStation in MyStationFrom">
+								{{MyStation.stnName}}--{{MyStation.stnCode}}
+								</a>
+								</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-sm-4" for="to-station">To Station <span class="color-red">*</span> :</label>
+								<div class="col-sm-7">
+									<input type="text" autocomplete="false" ng-model="trainTo" ng-change="findStationTo(trainTo)" class="form-control" id="to-station" placeholder="">
+									<div class="list-group" ng-if="divTo" style="position:absolute;z-index:100">
+								<a href="#" ng-click="SelectItTo(MyStation1.stnCode)" class="list-group-item" ng-repeat="MyStation1 in MyStationTo">
+								{{MyStation1.stnName}}--{{MyStation1.stnCode}}
+								</a>
+								</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-4 col-sm-7">
+									<div class="checkbox">
+										<label class="color-ltblue">
+                            <input ng-model="chkSwap" ng-change="swapStation(trainFrom,trainTo)" type="checkbox">
+                            <strong>Check Swap Station <i class="glyphicon glyphicon-retweet"></i></strong></label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-sm-4" for="journ-date">Journey Date <span class="color-red">*</span> :</label>
+								<div class="col-sm-7">
+									<div class="input-group date" data-provide="datepicker">
+										<input id="journy1-date" name="date" ng-model="Journydate" type="text" class="form-control">
+										<span class="input-group-addon" id="start-date"><i class="glyphicon glyphicon-calendar"></i></span> </div>
+								</div>
+							</div>
+							<div ng-if="false" class="form-group">
+								<div class="col-sm-offset-4 col-sm-7">
+									<div class="checkbox">
+										<label class="color-ltblue">
+                            <input type="checkbox">
+                            <strong>Flexible with Date</strong></label>
+									</div>
+								</div>
+							</div>
+							<div ng-if="false" class="form-group ">
+								<label class="control-label col-sm-4" for="tkt-type">Ticket Type <span class="color-red">*</span> :</label>
+								<div class="col-sm-7">
+									<select class="form-control" id="tkt-type">
+                          <option>E-Ticket</option>
+                          <option>I-Ticket</option>
+                        </select>
+								</div>
+							</div>
+							<div ng-if="false" class="form-group">
+								<div class="col-sm-offset-4 col-sm-7">
+									<div class="checkbox">
+										<label class="color-ltblue">
+                            <input type="checkbox">
+                            <strong>I'll book in special concession</strong></label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-1 col-sm-11">
+								<button type="submit" ng-click="TrainBtwnStations(trainFrom,trainTo,Journydate)" class="btn btn-primary">Submit</button>
+								<button type="reset" class="btn btn-primary">Reset</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!--Availability-------->
+		<div ng-if="!avlbl" class="col-md-12" style="color: red">{{message}}</div>
+		<div class="col-sm-12"   ng-if="avlbl">
+            <div class="panel panel-primary mt5 ml5"  >
+              <div class="panel-heading">
+              <strong>Availability Status</strong> 
+              </div>
+              <div class="panel-body">
+               <div class="row">
+              <div class="col-sm-12">
+				<i class="glyphicon glyphicon-remove-sign color-red"></i> Availability Train Number: {{trainData.trainNumber}} ( {{trainDeatil.trainName}} ), Class : {{avlClass}}, Quota : {{Quota}}  
+              </div>
+            </div>
+                <div class="table-responsive">
+              <table class="table table-bordered"   >
+                <thead>
+                  <tr class="bg-primary">
+                    <th>Date</th>
+					<th ng-repeat="date in trainDeatil.avlDayList" ng-if="isItArray(trainDeatil.avlDayList)">{{date.availablityDate}}</th>
+					<th ng-if="!isItArray(trainDeatil.avlDayList)">{{trainDeatil.avlDayList.availablityDate}}</th>
+								  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="valign-mid">Availability</td>
+					<td ng-repeat="avail in trainDeatil.avlDayList" ng-if="isItArray(trainDeatil.avlDayList)">{{avail.availablityStatus}}<br><a href="#" onclick="alert('comming soon...')">Book Now</a></td>
+					<td ng-if="!isItArray(trainDeatil.avlDayList)">{{trainDeatil.avlDayList.availablityStatus}}<br><a href="#">Book Now</a></td>
+								  </tr>
+                </tbody>
+              </table>
+            </div>
+             <div class="row">
+              <div class="col-sm-12">
+              <span class="color-red ft11">* CURR_AVBL : Current Booking Available | RAC : Reservation Against Cancellation | WL # : Wait List | REGRET/WL : No more booking allowed | AVAILABLE : Available | NOT AVAILABLE : Not Available </span> 
+              </div>
+            </div>
+             <div class="row mt10">
+              <div class="col-sm-12 text-center">
+              <hr class="mt0 mb0">
+            <span><a href="#">Confirm Availability on Alternate trains </a></span> <span class="pl12"><a href="#">Confirm Availability on Alternate classes </a></span>
+             <hr class="mt0 mb0">
+               </div>
+            </div>
+             <div class="row mt10">
+              <div class="col-sm-12">
+							 Fare Train Number: {{trainData.trainNumber}}, Class : {{avlClass}}, Date : 22-1-2017  
+              </div>
+            </div>
+             <div class="table-responsive">
+              <table class="table table-bordered"  >
+                <thead>
+                  <tr class="bg-primary">
+                    <th>Base Fare</th>
+                    <th>Reservation Charge</th>
+                    <th>Superfast Charge</th>
+                    <th>Other Charges</th>
+                    <th>Tatkal Charge</th>
+                    <th>Service Tax</th>
+                    <th>Total Fare</th>                    
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+										<td><strong>{{trainDeatil.baseFare}}</strong></td>
+                    <td><strong>{{trainDeatil.reservationCharge}}</strong></td>
+                    <td><strong>{{trainDeatil.superfastCharge}}</strong></td>
+                    <td><strong>{{trainDeatil.otherCharge}}</strong></td>
+                    <td><strong>{{trainDeatil.tatkalFare}}</strong></td>
+                    <td><strong>{{trainDeatil.serviceTax}}</strong></td>
+                    <td><strong>{{trainDeatil.totalCollectibleAmount}}</strong></td>
+                    
+                  </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+             <div class="row  ft11 color-red">
+              <div class="col-sm-12">
+              
+              <ul class="list-inside line-ht">
+              	<li>Rounding off to next multiple of Rs. 5 is included in Base fare.</li>
+              	<li>IR recovers only 57% of cost of travel on an average.</li>
+              </ul>
+            
+              </div>
+             
+            </div>
+              </div>
+            </div>
+          </div>
+		<!----END Availability ------>
+		<div class="col-sm-12"    ng-if="trains">
+			<div class="bg-primary head-title">
+				<h5>Train Between Stations</h5>
+			</div>
+			<div class="row mt10">
+				<div class="col-sm-8">
+					
+						<label class="control-label" for="email">Select Quota :</label>
+						<label ng-repeat="config in trainConfig.quotaList" class="radio-inline">
+                <input type="radio" ng-model="Quota" ng-change="quotaChange(config)" ng-value="config" name="optradio">
+				<span ng-if="config=='GN'">GENERAL</span>
+				<span ng-if="config=='PT'">PREMIUM TATKAL</span>
+				<span ng-if="config=='HP'">PHYSICALLY HANDICAP</span>
+				<span ng-if="config=='LD'">LADIES</span>
+				<span ng-if="config=='TQ'">TATKAL</span>
+				</label>
+				</div>
+				<div class="col-sm-4 color-red">Click on a Class to get Availability and Fare* </div>
+			</div>
+			<div class="table-responsive" style="max-height: 450px;overflow-y:scroll">
+				<table class="table table-bordered"  >
+					<thead class="bg-primary">
+							<th>Train No.</th>
+							<th>Train Name</th>
+							<th>From</th>
+							<th>Departure </th>
+							<th>To</th>
+							<th>Arrival </th>
+							<th>Dist.(Km) </th>
+							<th>Travel Time</th>
+							<th>Mon</th>
+							<th>Tue</th>
+							<th>Wed</th>
+							<th>Thu</th>
+							<th>Fri</th>
+							<th>Sat</th>
+							<th>Sun</th>
+							<th>Class</th>
+					</thead>
+					<tbody>
+						<tr ng-repeat="train in trains">
+							<td><a href="#">{{train.trainNumber}}</a></td>
+							<td>{{train.trainName}}</td>
+							<td>{{train.fromStnCode}}</td>
+							<td>{{train.departureTime}}</td>
+							<td>{{train.toStnCode}}</td>
+							<td>{{train.arrivalTime}}</td>
+							<td>{{train.distance}}</td>
+							<td>{{train.duration}}</td>
+							<td><i ng-class="{'glyphicon glyphicon-remove-sign color-red':train.runningMon=='N','glyphicon glyphicon-ok-sign color-green':train.runningMon=='Y'}"></td>
+							<td><i ng-class="{'glyphicon glyphicon-remove-sign color-red':train.runningTue=='N','glyphicon glyphicon-ok-sign color-green':train.runningTue=='Y'}"></i></td>
+							<td><i ng-class="{'glyphicon glyphicon-remove-sign color-red':train.runningWed=='N','glyphicon glyphicon-ok-sign color-green':train.runningWed=='Y'}"></td>
+							<td><i ng-class="{'glyphicon glyphicon-remove-sign color-red':train.runningThu=='N','glyphicon glyphicon-ok-sign color-green':train.runningThu=='Y'}"></td>
+							<td><i ng-class="{'glyphicon glyphicon-remove-sign color-red':train.runningFri=='N','glyphicon glyphicon-ok-sign color-green':train.runningFri=='Y'}"></td>
+							<td><i ng-class="{'glyphicon glyphicon-remove-sign color-red':train.runningSat=='N','glyphicon glyphicon-ok-sign color-green':train.runningSat=='Y'}"></td>
+							<td><i ng-class="{'glyphicon glyphicon-remove-sign color-red':train.runningSun=='N','glyphicon glyphicon-ok-sign color-green':train.runningSun=='Y'}"></td>
+							<td> <a href="#" ng-click="findSeat(train,Journydate,class)" ng-if="isItArray(train.avlClasses)"  ng-repeat="class in train.avlClasses" style="padding-right:5px">{{class}}</a>
+							<a href="#" ng-if="!isItArray(train.avlClasses)">{{train.avlClasses}}</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+<section class="content" ng-if="PageSetting.title">
+	<div class="col-md-12">
+		<div class="col-md-2" ng-show="left" ng-bind-html="deliberatelyTrustDangerousLeftHtml()">
+		</div>
+		<div ng-class="{'col-md-8': content=='8','col-md-10': content=='10','col-md-12':content=='12'}">
+			<p ng-bind-html="deliberatelyTrustDangerousHtml()">
+			</p>
+		</div>
+
+		<div class="col-md-2" ng-show="right" ng-bind-html="deliberatelyTrustDangerousRightHtml()">
+		</div>
+		<div>
+</section>

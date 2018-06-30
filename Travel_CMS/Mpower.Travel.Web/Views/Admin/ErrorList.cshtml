@@ -1,0 +1,101 @@
+ @{ if(TempData["Layout"]!=null) { Layout=null; } ViewData["Title"] = "Application Error List"; }
+ <link rel="stylesheet" href="~/plugins/datatables/dataTables.bootstrap.css">
+
+<section class="content" ng-app="mainApp" ng-controller="errorController">
+	<hr />
+	<div class="col-xs-12">
+		<div class="box">
+			<div class="box-header">
+				<h2 class="box-title">List of Application Errors</h2>
+			</div>
+			<div>
+				<div class="col-xs-4">
+					<label for="search">Search:</label>
+					<input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+				</div>
+				<div class="col-xs-4">
+					<label for="search">items per page:</label>
+					<input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+				</div>
+			</div>
+			<div class="box-body">
+				<div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+					<div class="row">
+						<div class="col-sm-12">
+							<table id="example1" class="table table-bordered table-striped" role="grid">
+								<thead>
+									<tr role="row">
+										<th class="col-md-1" style="cursor:pointer" ng-click="sortType = 'id'; sortReverse = !sortReverse">ErrorId<i class="fa fa-fw fa-sort"></i></th>
+										<th class="col-md-5" style="cursor:pointer" ng-click="sortType = 'errorType'; sortReverse = !sortReverse">Error Type<i class="fa fa-fw fa-sort"></i></th>
+										<th class="col-md-3 hidden-sm hidden-xs" style="cursor:pointer" ng-click="sortType = 'logDate'; sortReverse = !sortReverse">LogDate<i class="fa fa-fw fa-sort"></i></th>
+										<th class="col-md-3" >Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr role="row" class="odd" dir-paginate="error in errorList | filter:q | itemsPerPage: pageSize" current-page="currentPage">
+										<td class="col-md-1">{{error.id}}</td>
+										<td class="col-md-5">{{error.errorType}}</td>
+										<td class="col-md-3 hidden-sm hidden-xs">{{error.logDate | date:'dd/MM/yyyy hh:mm:ss'}}</td>
+										<td class="col-md-3">
+											<a confirmed-click="delete(error.id)" ng-confirm-click="Do you want to delete?" style="cursor: pointer;padding:3px" class="text-black"><span class="glyphicon glyphicon-trash"> </span></a>
+											<a ng-click="showModel(error.errorDescription)" style="cursor: pointer;padding:3px" class="text-black"><span class="glyphicon glyphicon-search"></span></a>
+										</td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr></tr>
+								</tfoot>
+							</table>
+							<div align="center">
+								<ul class="pagination pagination-sm">
+									<dir-pagination-controls boundary-links="true" template-url="..\Directives\dirPagination.tpl.html"></dir-pagination-controls>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="row" style="visibility:hidden">
+						<div class="col-sm-5">
+							<div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+						</div>
+						<div class="col-sm-7">
+							<div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+								<ul class="pagination">
+									<li class="paginate_button previous disabled" id="example1_previous">
+										<a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li>
+									<li class="paginate_button next" id="example1_next">
+										<a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<modal id="myModel">
+				<h3>{{title}}</h3>
+				<hr/>
+				<span ng-style="{color:(title)==true?'black':'green'}">{{Message}}</span>
+			</modal>
+
+			<modal visible="showModal">
+				<span ng-style="{color : (Error)== true ? 'red' : 'green'}">{{Message}}</span>
+			</modal>
+			<!-- /.box-body -->
+			<!--Loader-->
+			<loading></loading>
+		</div>
+	</div>
+</section>
+
+<!-- DataTables -->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28//angular-route.min.js"></script>
+ <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+
+  <!-- Angular Material Library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+<script type="text/javascript" src="~/SharedFactory.js"></script>
+<script type="text/javascript" src="~/Admin/CMSRoute.js"></script>
+<script src="~/Admin/ErrorLogs/ErrorService.js"></script>
+<script type="text/javascript" src="@Url.Content("~/Admin/ErrorLogs/ErrorController.js")"></script>

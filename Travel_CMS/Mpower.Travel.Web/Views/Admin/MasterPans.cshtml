@@ -1,0 +1,16 @@
+@{ 
+  TempData["Layout"]=Layout; 
+} 
+<link rel="stylesheet" href="~/plugins/datatables/dataTables.bootstrap.css"> 
+ <div ng-app="PanApp"> 
+     <ng-view></ng-view> 
+    </div> 
+<script src="//cdn.ckeditor.com/4.5.11/full/ckeditor.js"></script> 
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28//angular-route.min.js"></script>
+<script type="text/javascript" src="~/SharedFactory.js"></script>
+<script type="text/javascript" src="~/Admin/Pans/PanRoute.js"></script> 
+<script type="text/javascript" src="~/Admin/Pans/PanListService.js"></script> 
+<script type="text/javascript" src="~/Admin/Pans/PanService.js"></script> 
+ <script type="text/javascript" src="@Url.Content("~/Admin/Pans/PanController.js")"></script>  
+<script type="text/javascript" src="@Url.Content("~/Admin/Pans/PanListController.js")"></script>

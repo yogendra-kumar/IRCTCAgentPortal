@@ -1,0 +1,9 @@
+{
+  "ConnectionStrings": {
+    //  "ConnectionString": "Data Source=172.160.0.26;Database=AspnetRoleTest;user id=sa;pwd=cgs123",
+    //   "provider":"sqlserver"
+    /*----------used for postgres-----------------------*/
+    "provider": "postgres",
+    "ConnectionString": "Database=oxirail_enh;server=172.160.0.26;uid=postgres;pwd=cgs123"
+  }
+}

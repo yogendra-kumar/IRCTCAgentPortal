@@ -1,0 +1,23 @@
+.panel-heading {
+    padding: 0px 0px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.modelTable>tbody>tr>th, .modelTable>tfoot>tr>td, .modelTable>tfoot>tr>th, .modelTable>thead>tr>td, .modelTable>thead>tr>th {
+    padding: 1px;
+    /*line-height: 1.42857143;*/
+    line-height: 1;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+.modelTable {
+    border-spacing: 0;
+    border-collapse: collapse;
+    font-size: 10pt;
+}
+.modelTable>tbody>tr>td {
+    padding-bottom:0px;
+    padding: 1px;
+}

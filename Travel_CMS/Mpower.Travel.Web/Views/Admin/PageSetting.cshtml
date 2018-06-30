@@ -1,0 +1,95 @@
+@{ @if(TempData["Layout"]!=null)
+ 		{ Layout=null; }
+  ViewData["Title"] = "Page Settings";
+ }
+<section class="content-header">
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li class="active">Pages</li>
+	</ol>
+</section>
+<section class="content" ng-controller="PageSettingController">
+	<hr />
+	<div class="col-xs-12">
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title">Manage Pages</h3>
+			</div>
+			<!-- /.box-header -->
+			<div class="box-body">
+				<div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+					<div class="row">
+						<div class="col-sm-12">
+							<div id="example1_filter" class="dataTables_filter">
+								<!--<label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="example1"></label>-->
+								<button type="submit" class="btn btn-primary" ng-click="Create()">Add</button>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<table id="example1" class="table table-bordered table-striped" role="grid" aria-describedby="example1_info">
+								<thead>
+									<tr role="row">
+										<th class="col-md-2">Page Order</th>
+										<th	class="col-md-1">Title</th>
+										<th class="col-md-1">Url Key</th>
+										<th class="col-md-3 hidden-sm hidden-xs">Layout</th>
+										<th class="col-md-1">Active</th>
+										<th class="col-md-2 hidden-sm hidden-xs">Last Updated</th>
+										<th class="col-md-2">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr role="row" ng-repeat="p in PageView| orderBy : 'index' " ng-animate="'p'">
+										<td class="col-md-2">
+											<a onMouseOver="this.style.color='blue'" onMouseOut="this.style.color='black'" style="cursor: pointer;padding:3px;color:black !important"
+												class="glyphicon glyphicon-arrow-up" href ng-click="pageUp(p.index,p.id)"></a>
+											<a onMouseOver="this.style.color='blue'" onMouseOut="this.style.color='black'" style="cursor: pointer;padding:3px;color:black !important"
+												class="glyphicon glyphicon-arrow-down" href ng-click="pageDown(p.index,p.id)"></a>
+										</td>
+										<td class="col-md-1">{{p.title}}</td>
+										<td class="col-md-1">{{p.viewName}}</td>
+										<td class="col-md-3 hidden-sm hidden-xs">
+											<span ng-if="p.leftPanId > 0 && p.rightPanId > 0">3 Column with Left & Right Pan</span>
+											<span ng-if="p.leftPanId >0 && p.rightPanId==0"> 2 column with Left Pan</span>
+											<span ng-if="p.rightPanId > 0 && p.leftPanId==0"> 2 column with Right Pan</span>
+											<span ng-if="p.rightPanId==0 && p.leftPanId==0">Content without Left & Right Pan</span>
+											<input type="hidden" ng-model="id" value={{p.id}} />
+										</td>
+										<td class="col-md-1">{{p.isActive}}</td>
+										<td class="col-md-2 hidden-sm hidden-xs">{{p.modifiedDate | date:'dd/MM/yyyy hh:mm:ss'}}</td>
+										<td class="col-md-2"><a ng-click="click(p.id)" style="cursor: pointer;padding:3px" class="text-black"><span class="glyphicon glyphicon-pencil"></span></a>
+											<a confirmed-click="Remove(p.id)" ng-confirm-click="Do you want to delete?" onMouseOver="this.style.color='red'" onMouseOut="this.style.color='black'"
+												style="cursor: pointer;padding:3px;color:black !important"><span class="glyphicon glyphicon-trash"> </span></a>
+											<a href="#" style="cursor: pointer;padding:3px" class="text-black"><span class="glyphicon glyphicon-search"></span></a>
+
+										</td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr></tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+					<modal visible="showModal">
+						<span ng-style="{color : (Error)== true ? 'red' : 'green'}">{{Message}}</span>
+					</modal>
+					<div class="row">
+						<div class="col-sm-5">
+							<div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Total {{PageView.length}} entries</div>
+						</div>
+					</div>
+					<!--Loader-->
+					<!--<loading></loading>-->
+				</div>
+			</div>
+			<!-- /.box-body -->
+		</div>
+	</div>
+</section>
+
+
+
+<!-- DataTables -->

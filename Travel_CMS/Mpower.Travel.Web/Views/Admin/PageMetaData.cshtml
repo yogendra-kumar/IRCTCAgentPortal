@@ -1,0 +1,67 @@
+@model RegisterViewModel
+@{
+    Layout=null;
+    
+}
+<section class="content-header">
+      <h1>
+      @ViewData["Title"].
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        
+      </ol>
+ </section>
+ <section class="content" ng-app="mainApp" ng-controller="PageMetaDataController">
+        <div class="container">
+    <form class="form-horizontal" novalidate name="PageMetaDataForm">
+                <ul class="nav nav-pills">
+                    <li><a data-toggle="pill" href="/PageEdit">Page Information</a></li>
+                    <li  ><a data-toggle="pill" href="/PageContent">Content</a></li>
+                    <li><a data-toggle="pill" href="/PageLayout">Page Layout</a></li>
+                    <li class="active"><a data-toggle="pill" href="/PageMetaData">Meta Data</a></li>
+                </ul>
+
+<br/>
+        <div class="tab-content">
+               <div id="menu3" class="tab-pane fade in active">
+                        
+                            <div class="row">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">KeyWords:</label>  
+                                <span style="color:red">*</span>
+                                <div class="col-md-6">
+                                    <input type="text" name="myKeywords" maxlength="150"  required data-ng-model="Page.keyword" class="form-control" data-toggle="tooltip" data-placement="top" title="{{tooltipItems[0]}}" />
+                                    
+                                    <span ng-show="PageMetaDataForm.myKeywords.$error.required" class="text-danger">
+                                    Mandatory field
+                                </span>
+                                </div>                              
+                            </div>
+                            <div class="form-group">
+                            <label class="col-md-2 control-label">Description:</label>                            
+                                <div class="col-md-6">
+                                    <textarea rows="4" maxlength="250" placeholder="enter the escrition of each keywords. Its optional" name="description" data-ng-model="Page.description" class="form-control" 
+                                    data-toggle="tooltip" data-placement="top" title="{{tooltipItems[1]}}">
+                                    </textarea>                                             
+                                </div>
+                            </div>
+                       <div class="form-group">
+                            <div class="col-md-offset-4 col-md-12">
+                                <button type="submit" class="btn btn-primary" ng-click="Update()">Submit</button>
+                                <button type="submit" class="btn btn-default " ng-click="Back()">Cancel</button>
+                            </div>
+                        </div>
+                         </div>
+                    </div>
+             </div>             
+        </div>
+    </form>
+    <modal visible="showModal">
+      <span ng-style="{color : (Error)== true ? 'red' : 'green'}">{{Message}}</span>
+    </modal>
+    <!--Loader-->
+    <!--<loading></loading>-->
+ </div>
+ </section>
+ 

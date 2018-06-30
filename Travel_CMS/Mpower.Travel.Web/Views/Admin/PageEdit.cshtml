@@ -1,0 +1,93 @@
+@model RegisterViewModel
+@{
+    Layout=null;
+    ViewData["Title"] = "Edit Page";
+}
+
+<section class="content-header">
+      <h1>
+      @ViewData["Title"].
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>       
+      </ol>
+      
+ </section>
+ <section class="content" >
+       
+        <div class="container">
+    <form  class="form-horizontal" novalidate name="PageForm">
+                <ul class="nav nav-pills">
+                    <li class="active" ><a data-toggle="pill" href="/PageEdit">Page Information</a></li>
+                    <li><a data-toggle="pill" href="/PageContent">Content</a></li>
+                    <li><a data-toggle="pill" href="/PageLayout">Page Layout</a></li>
+                    <li><a data-toggle="pill" href="/PageMetaData">Meta Data</a></li>
+                </ul>
+             
+
+<br/>
+        <div class="tab-content">
+               <div id="menu" class="tab-pane fade in active">
+                        <div class="col-md-10">
+                                      <div class="form-group">
+                            <label class="col-md-3 control-label">Page Title:</label>
+                                <span style="color:red">*</span>
+                            <div class="col-md-8">
+                                <input required type="text" maxlength="150" data-ng-model="Page.title" name="pageTitle" class="form-control" />
+                                <span ng-show="PageForm.pageTitle.$error.required" class="text-danger">
+                                    Mandatory field
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">ViewName:</label>
+                               <span style="color:red">*</span>
+                            <div class="col-md-8">
+                                <input required type="text" maxlength="150" name="viewName" data-ng-model="Page.viewName" class="form-control" />
+                                <span ng-show="PageForm.viewName.$error.required" class="text-danger">
+                                    Mandatory field
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Parrent Page:</label>
+                            <div class="col-md-8">
+                               <select class="form-control" data-ng-model="ddlPage">
+                                  <option value="0">--Select Layout--</option>
+                                  <option ng-repeat="d in Page.pageList" value="{{d.key}}" ng-selected="{{Page.parentID==d.key}}">
+                                  {{d.value}}    
+                                  </option>
+                              </select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-3 control-label">Is Active:</label>
+				<div class="col-md-8">
+					<select class="form-control" data-ng-model="ddlIsActive">
+                                <option value="true" ng-selected="{{true==$scope.Page.isActive}}">True</option>
+                                <option value="false" ng-selected="{{false==$scope.Page.isActive}}">False</option>
+                    </select>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-md-offset-6 col-md-12">
+					<button type="submit" class="btn btn-primary" ng-click="Save()">Submit</button>
+					<button type="submit" class="btn btn-default" ng-click="Back()">Cancel</button>
+				</div>
+				<modal visible="showModal">
+					<span ng-style="{color : (Error)== true ? 'red' : 'green'}">{{Message}}</span>
+				</modal>
+                <!--Loader-->
+			    <!--<loading></loading>-->
+			</div>
+		</div>
+	</div>
+</div>
+</form>
+</div>
+</section>
+
+         
+      
+  
+ 

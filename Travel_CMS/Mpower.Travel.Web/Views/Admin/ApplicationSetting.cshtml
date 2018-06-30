@@ -1,0 +1,66 @@
+@{
+    ViewData["Title"] = "Application Setting";
+}
+
+<div class="col-md-8">
+ <div data-ng-app="mainApp" class="container" data-ng-controller="ApplicationSettingController" >
+    <div class="row">
+        <div class="bs-example marginTop50" data-example-id="table-within-panel">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3> Edit Application setting (Key,Value)</h3></div>
+                
+                <table class="table  table-bordered table-striped">
+                    <thead>
+                        <tr role="row">
+                            <th>
+                                #
+                            </th>
+                            <th>
+                                Key
+                            </th>
+                            <th>
+                                Value
+                            </th>
+                            
+                            <th>
+                                Edit
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="Setting in ApplicationSetting">
+                            <th scope="row">
+                                {{$index+1}}
+                            </th>
+                            <td class="col-md-3">
+                                <span>{{Setting.key}}</span>
+                            </td>
+                            <td class="col-md-3">
+                                <span ng-show="Setting.showEdit">{{Setting.value}}</span>
+                                <input ng-show="!Setting.showEdit" maxlength="150" type="text" ng-model="Setting.value" class="form-control">
+                            </td>
+                            <td>
+                                <span ng-show="Setting.showEdit" ng-click="toggleEdit(Setting)" style="cursor: pointer" class="glyphicon glyphicon-pencil"></span>
+                                <span ng-show="!Setting.showEdit" ng-click="toggleEdit(Setting)" style="cursor: pointer" class="glyphicon glyphicon-ok"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <modal visible="showModal">
+                <span ng-style="{color : (Error)== true ? 'red' : 'green'}">{{Message}}</span>
+                </modal>
+                <!--Loader-->
+			    <loading></loading>
+            </div>
+        </div>
+    </div>
+ </div>
+ 
+ </div>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28//angular-route.min.js"></script>
+   <script type="text/javascript" src="~/SharedFactory.js"></script>
+  <script type="text/javascript" src="~/Admin/CMSRoute.js"></script>
+  <script src="~/Admin/Application/ApplicationSettingService.js"></script>
+  <script type="text/javascript" src="@Url.Content("~/Admin/Application/ApplicationSettingController.js")"></script> 

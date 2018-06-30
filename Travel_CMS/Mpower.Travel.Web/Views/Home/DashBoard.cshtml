@@ -1,0 +1,18 @@
+@{
+   Layout="_OxigenLayout";
+}
+<div style="width:100%;" ng-controller="LoginController" ng-app="App">
+    <div class="container-fluid">
+      <div class="row">
+         <div class="col-md-2">
+      @await Html.PartialAsync("_OxiSideLayout")
+          <script>
+                    document.getElementById('distribution-main-li').className="active_nav";
+                  </script> 
+         </div>
+  <div ng-view class="col-md-10" >
+   </div>
+  </div>
+  </div>
+</div>
+</div>

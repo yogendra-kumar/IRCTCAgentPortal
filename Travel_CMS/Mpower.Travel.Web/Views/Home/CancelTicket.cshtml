@@ -1,0 +1,240 @@
+@{ Layout=null; }
+<link rel="stylesheet" type="text/css" href="~/css/CustomTable.css">
+<section class="content" ng-app="App" ng-controller="CancelTicketController" style="margin-left: 15px">
+<div class="container">
+	<div class="modal fade" id="ticketModal" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">{{title}}</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" novalidate name="ApplicationForm">
+						<div class="panel panel-primary">
+							<div class="panel-heading" style="background-color:#0059a0;color:white;">
+<b>Ticket Detail</b>
+</div>
+<table class="table modelTable">
+	<tr>
+		<th>PNR Number</th>
+		<td>{{ ticketDetailData.pnrNumber}}</td>
+		<th>Transaction ID </th>
+		<td>{{ ticketDetailData.transactionId}}</td>
+	</tr>
+	<tr>
+		<th>Train Number</th>
+		<td>{{ ticketDetailData.trainNumber}}</td>
+		<th>Train Name </th>
+		<td>{{ ticketDetailData.trainName}}</td>
+	</tr>
+
+	<tr>
+		<th>From</th>
+		<td>{{ ticketDetailData.sourceStation}}</td>
+		<th>To </th>
+		<td>{{ ticketDetailData.destStation}}</td>
+	</tr>
+
+	<tr>
+		<th>Journey Date</th>
+		<td>{{ ticketDetailData.journeyDay}}-{{ ticketDetailData.journeyMonth}}-{{ ticketDetailData.journeyYear}}</td>
+		<th>Class</th>
+		<td>{{ ticketDetailData.class}}</td>
+	</tr>
+
+	<tr>
+		<th>Boarding</th>
+		<td>{{ ticketDetailData.bordingPoint}}</td>
+		<th>Reservation Upto</th>
+		<td>{{ ticketDetailData.reserveUpto}}</td>
+	</tr>
+
+	<tr>
+		<th>Quota</th>
+		<td>{{ ticketDetailData.quota}}</td>
+		<th>Boarding Date</th>
+		<td>{{ ticketDetailData.bordingDay}}-{{ ticketDetailData.bordingMonth}}-{{ ticketDetailData.bordingYear}}</td>
+	</tr>
+
+	<tr>
+		<th>Status</th>
+		<td>{{ ticketDetailData.ticketStatus}}</td>
+		<th>Travel Insurance Opted</th>
+		<td>{{ ticketDetailData.ticketInsurance.insuranceIssued}}</td>
+	</tr>
+
+	<tr ng-if="ticketDetailData.ticketInsurance.insuranceIssued">
+		<th>Policy Status</th>
+		<td>{{ ticketDetailData.ticketInsurance.policyStatus}}</td>
+		<th>Policy Issue Date</th>
+		<td>{{ ticketDetailData.ticketInsurance.policyIssueDate | date:'dd/MM/yyyy' }}</td>
+	</tr>
+
+
+	<tr ng-if="ticketDetailData.ticketInsurance.insuranceIssued">
+		<th>Insurance Company</th>
+		<td>{{ ticketDetailData.ticketInsurance.insuranceCompany}}</td>
+		<th>Insurance Company URL</th>
+		<td><a href="{{ticketDetailData.ticketInsurance.insuranceCompanyUrl}}" target="_blank">Click For Nominee Registration</a></td>
+	</tr>
+
+</table>
+
+</div>
+
+<div class="panel panel-primary">
+	<div class="panel-heading" style="background-color:#0059a0;color:white;">
+<b>Passenger Detail</b>
+</div>
+
+<table class="table modelTable">
+	<tr>
+		<th>Name</th>
+		<th>Age </th>
+		<th>Sex</th>
+		<th>Coach No./Seat No./Status</th>
+		<th>Bearth</th>
+
+	</tr>
+	<tr ng-repeat="passengerdetail in passengerDetailData">
+		<td>{{ passengerdetail.name}}</td>
+		<td>{{ passengerdetail.age}}</td>
+		<td>{{ passengerdetail.sex}}</td>
+		<td>{{ passengerdetail.coach}} - {{ passengerdetail.seat}} - {{ passengerdetail.currentStatus}}</td>
+		<td>{{ passengerdetail.berth}}</td>
+	</tr>
+
+</table>
+</div>
+
+
+<div class="panel panel-primary" ng-show= "ticketDetailData.refundHistoryList != null">
+	<div class="panel-heading" style="background-color:#0059a0;color:white;">
+<b>Refund Detail</b>
+</div>
+
+<table class="table modelTable">
+	<tr>
+		<th>Passenger Name</th>
+		<th>Refunded Amount</th>
+		<th>Cancellation Date</th>
+	</tr>
+	<tr ng-repeat="refundHistoryList in ticketDetailData.refundHistoryList">
+		<td>{{refundHistoryList.cancelledPassenger}}</td>
+		<td>{{refundHistoryList.amount}}</td>
+		<td>{{refundHistoryList.date}}</td>
+	</tr>
+
+</table>
+</div>
+
+<div class="panel panel-primary">
+	<div class="panel-heading" style="background-color:#0059a0;color:white;">
+<b>Payment Details</b>
+</div>
+
+<table class="table modelTable">
+	<tr>
+		<th>Payment Option</th>
+		<td>{{ ticketDetailData.paymentGatewayName}}</td>
+	</tr>
+	<tr>
+		<th>Ticket Charge</th>
+		<td>{{ ticketDetailData.ticketFare}}</td>
+	</tr>
+	<tr>
+		<th>IRCTC Service Charge</th>
+		<td>{{ ticketDetailData.irctcServiceCharge}}</td>
+	</tr>
+	<tr>
+		<th>Bank/PG Charges</th>
+		<td>{{ ticketDetailData.pgCharges}}</td>
+	</tr>
+	<tr>
+		<th>RO Commission on PG Charges</th>
+		<td>{{ ticketDetailData.roCommissionOnPGCharge}}</td>
+	</tr>
+	<tr>
+		<th>OxiRail Service Charge</th>
+		<td>{{ ticketDetailData.oxigenServiceCharge}}</td>
+	</tr>
+	<tr>
+		<th>Travel Insurance Charge</th>
+		<td>{{ ticketDetailData.ticketInsurance.insuranceCharge}}</td>
+	</tr>
+	<tr>
+		<th>Total</th>
+		<td>{{ ticketDetailData.totalFare}}</td>
+	</tr>
+</table>
+</div>
+</form>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div><div class="col-md-10">
+
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="bg-primary head-title">
+				<h5>Cancelled Ticket List</h5>
+			</div>
+			<div class="text-right mt5"> <span class="label label-primary">E-Ticket</span> </div>
+			<div class="table-responsive mt5">
+				<table class="table table-bordered ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="tabledata">
+					<thead>
+						<tr class="bg-primary">
+							<th>S.No.</th>
+							<th>Transaction ID</th>
+							<th>PNR Number</th>
+							<th>From</th>
+							<th>To</th>
+							<th>Date of Journey</th>
+							<th>Reservation Status</th>
+							<th>Date of Booking</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="ticket in tabledata">
+							<td>{{ $index+1}}</td>
+							<td><a href="" class="btn-link" ng-click="OpenPopup(ticket)">{{ ticket.irctcTxnNumber}}</a></td>
+							<td>{{ ticket.pnrNumber}}</td>
+							<td>{{ ticket.sourceStation}}</td>
+							<td>{{ ticket.destStation}}</td>
+							<td>{{ticket.journeyDay }}-{{ticket.journeyMonth }}-{{ticket.journeyYear}}</td>
+							<td>{{ ticket.status}}</td>
+							<td>{{ ticket.bookedOn | date:'dd-MM-yyyy' }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="row mt10">
+		<div class="col-sm-12">
+			<p><strong>Note:</strong></p>
+			<ol class="list-inside">
+				<li>No refund shall be granted on the confirmed ticket after four hours before the scheduled departure of the train.</li>
+				<li> No refund shall be granted on the RAC or Waitlisted ticket after thirty minutes before the scheduled departure of the
+					train.
+				</li>
+				<li>In case, on a party e-ticket or a family e-ticket issued for travel of more than one passenger, some passengers have
+					confirmed reservation and others are on RAC or waiting list, full refund of fare , less clerkage, shall be admissible
+					for confirmed passengers also subject to the condition that the ticket shall be cancelled online or online TDR shall
+					be filed for all the passengers upto thirty minutes before the scheduled departure of the train.</li>
+				<li>
+					For further details, please refer New refund rules 2015 w.e.f 12-Nov-2015.
+				</li>
+				<li class="text-danger">Click Transaction ID to check Travel Insurance related details. </li>
+			</ol>
+		</div>
+	</div>
+
+
+</div>
+</div>
+</section>
